@@ -362,7 +362,7 @@ impl<E: PropertyAccess> Parser<E> {
         Ok(vals)
     }
     fn __read_ascii_property(&self, elem_iter: &mut Iter<String>, data_type: &PropertyType) -> Result<Property> {
-        let s : &String = match elem_iter.next() {
+        let s = match elem_iter.next() {
             None => return Err(io::Error::new(
                 ErrorKind::InvalidInput,
                 format!("Expected element of type '{:?}', but found nothing.", data_type)
@@ -411,7 +411,7 @@ impl<E: PropertyAccess> Parser<E> {
         where <D as FromStr>::Err: error::Error + marker::Send + marker::Sync + 'static {
         let mut list = Vec::<D>::new();
         for i in 0..count {
-            let s : &String = match elem_iter.next() {
+            let s = match elem_iter.next() {
                 None => return Err(io::Error::new(
                     ErrorKind::InvalidInput,
                     format!("Couldn't find a list element at index {}.", i)

@@ -24,7 +24,7 @@ ply-rs = "0.1.3"
 
 Add to your root:
 
-```rust
+```rust,no_run
 extern crate ply_rs;
 
 fn main() {}
