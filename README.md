@@ -22,14 +22,6 @@ Add to your `Cargo.toml`:
 ply-rs = "0.1.3"
 ```
 
-Add to your root:
-
-```rust
-extern crate ply_rs;
-
-fn main() {}
-```
-
 ### Read a ply file
 
 This is the easiest way to read a ply file:
@@ -65,7 +57,7 @@ fn main() {
 
 The simplest case of writing a ply file:
 
-```rust
+```rust,no_run
 extern crate ply_rs;
 use ply_rs::ply::{ Ply, DefaultElement };
 use ply_rs::writer::{ Writer };

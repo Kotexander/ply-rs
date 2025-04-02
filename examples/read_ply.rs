@@ -1,4 +1,3 @@
-extern crate ply_rs;
 use ply_rs as ply;
 
 /// Demonstrates simplest use case for reading from a file.

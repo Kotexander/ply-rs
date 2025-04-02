@@ -1,4 +1,3 @@
-extern crate ply_rs;
 use ply_rs::*;
 
 type Ply = ply::Ply<ply::DefaultElement>;
@@ -7,7 +6,7 @@ fn read_file(path: &str) -> Ply {
     let mut f = std::fs::File::open(path).unwrap();
     let p = parser::Parser::new();
     let ply = p.read_ply(&mut f);
-    assert!(ply.is_ok(), format!("failed: {}", ply.err().unwrap()));
+    assert!(ply.is_ok(), "failed: {}", ply.err().unwrap());
     ply.unwrap()
 }
 
@@ -67,9 +66,9 @@ fn read_all_atomic_types_ok() {
 }
 
 mod struct_test_1 {
-    use super::ply;
     use super::parser::Parser;
-    use std;
+    use super::ply;
+
     use super::read_file;
     #[derive(Debug)]
     struct Vertex {
@@ -82,7 +81,6 @@ mod struct_test_1 {
     struct Face {
         vertex_index: Vec<i32>,
     }
-
 
     impl ply::PropertyAccess for Vertex {
         fn new() -> Self {
@@ -142,8 +140,16 @@ mod struct_test_1 {
         for (_ignore_key, element) in &header.elements {
             // we could also just parse them in sequence, but the file format might change
             match element.name.as_ref() {
-                "vertex" => {vertex_list = vertex_parser.read_payload_for_element(&mut f, &element, &header).unwrap();},
-                "face" => {face_list = face_parser.read_payload_for_element(&mut f, &element, &header).unwrap();},
+                "vertex" => {
+                    vertex_list = vertex_parser
+                        .read_payload_for_element(&mut f, element, &header)
+                        .unwrap();
+                }
+                "face" => {
+                    face_list = face_parser
+                        .read_payload_for_element(&mut f, element, &header)
+                        .unwrap();
+                }
                 _ => panic!("Enexpeced element!"),
             }
         }
@@ -152,7 +158,7 @@ mod struct_test_1 {
         println!("vertex list: {:#?}", vertex_list);
         println!("face list: {:#?}", face_list);
 
-        let ply = read_file(&path);
+        let ply = read_file(path);
 
         for i in 0..vertex_list.len() {
             let x = match ply.payload["vertex"][i]["x"] {

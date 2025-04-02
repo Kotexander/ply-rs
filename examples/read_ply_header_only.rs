@@ -1,4 +1,3 @@
-extern crate ply_rs;
 use ply_rs as ply;
 
 /// Sometimes only the meta data is interesting to us.

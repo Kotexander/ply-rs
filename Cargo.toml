@@ -8,12 +8,10 @@ license = "MIT"
 readme = "README.md"
 documentation = "https://fluci.github.io/travis_docs/ply-rs/ply_rs/index.html"
 description = "Library for reading/writing ascii and binary PLY files."
-keywords = [ "ply" ]
-categories = [ "encoding", "parsing" ]
+keywords = ["ply"]
+categories = ["encoding", "parsing"]
 build = "build.rs"
-exclude = [
-    "scripts/*"
-]
+exclude = ["scripts/*"]
 edition = "2018"
 
 [badges]

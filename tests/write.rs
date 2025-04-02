@@ -1,14 +1,13 @@
-extern crate ply_rs;
-use ply_rs::*;
 use ply_rs::ply::*;
-use std::io::{ Read, BufReader };
+use ply_rs::*;
+use std::io::{BufReader, Read};
 
 type Ply = ply::Ply<ply::DefaultElement>;
 
 fn read_buff<T: Read>(mut buf: &mut T) -> Ply {
     let p = parser::Parser::new();
     let ply = p.read_ply(&mut buf);
-    assert!(ply.is_ok(), format!("failed: {}", ply.err().unwrap()));
+    assert!(ply.is_ok(), "failed: {}", ply.err().unwrap());
     ply.unwrap()
 }
 
@@ -21,7 +20,7 @@ fn write_buff(ply: &Ply) -> Vec<u8> {
 
 fn read_write_ply(ply: &Ply) -> Ply {
     println!("writing ply:\n{:?}", ply);
-    let ve : Vec<u8> = write_buff(&ply);
+    let ve: Vec<u8> = write_buff(ply);
     let txt = String::from_utf8(ve.clone()).unwrap();
     println!("written ply:\n{}", txt);
     let mut buff = BufReader::new(&(*ve));
@@ -84,7 +83,10 @@ fn create_list_elements() -> Ply {
     let mut ply = Ply::new();
 
     let mut e = ElementDef::new("aList".to_string());
-    let p = PropertyDef::new("x".to_string(), PropertyType::List(ScalarType::Int, ScalarType::Int));
+    let p = PropertyDef::new(
+        "x".to_string(),
+        PropertyType::List(ScalarType::Int, ScalarType::Int),
+    );
     e.properties.add(p);
 
     let mut list = Vec::new();
